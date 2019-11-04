@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Smart CCTV based on Deep Learning</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="{{url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="{{url_for('static',filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet"
+    type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+    rel="stylesheet" type="text/css">
+  <link href="{{url_for('static',filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="{{url_for('static',filename='css/stylish-portfolio.min.css')}}" rel="stylesheet">
+
+  <!-- bootstrap icon -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <!-- scripts -->
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+  <style>
+    body {
+      padding-right: 0 !important;
+    }
+
+    .cctvName {
+      white-space: pre;
+      font-size: 30px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body id="page-top">
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Smart CCTV</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">Video1</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1">Smart CCTV based on Deep Learning</h1>
+      <h3 class="mb-5">
+        <em>function : fire-detection, car accident detection, face detection</em>
+      </h3>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Watch CCTV Video</a>
+    </div>
+    <div class="overlay"></div>
+  </header>
+
+  <!-- CCTV -->
+  <section class="content-section bg-light" id="about">
+    <span class="cctvName">&#9;&#9;&#9;&#9;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCTV 1&#9;&#9;&#9;&#9;&#9;&#9;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCTV 2&#9;&#9;&#9;&#9;&#9;&#9;&#9;&nbsp;&nbsp;CCTV 3&#9;&#9;&#9;&#9;&#9;&#9;&nbsp;&nbsp;&nbsp;&nbsp;CCTV 4</span>
+    <p style="text-align: center;">
+      <img src={{ url_for('static', filename='cam_img/cam_none.jpg') }} width="400" height="300" class="img-responsive">
+      <a href="#camera1" data-toggle="modal" data-backdrop="static">
+        <img src={{ url_for('video_feed1') }} width="400" height="300" class="img-responsive">
+      </a>
+      <a href="#camera2" data-toggle="modal" data-backdrop="static">
+        <img src={{ url_for('video_feed2') }} width="400" height="300" class="img-responsive">
+      </a>
+      <img src={{ url_for('static', filename='cam_img/cam_none.jpg') }} width="400" height="300" class="img-responsive">
+    </p>
+    <span class="cctvName">&#9;&#9;&#9;&#9;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCTV 5&#9;&#9;&#9;&#9;&#9;&#9;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCTV 6&#9;&#9;&#9;&#9;&#9;&#9;&#9;&nbsp;&nbsp;CCTV 7&#9;&#9;&#9;&#9;&#9;&#9;&nbsp;&nbsp;&nbsp;&nbsp;CCTV 8</span>
+    <p style="text-align: center;">
+      <img src={{ url_for('static', filename='cam_img/cam_none.jpg') }} width="400" height="300" class="img-responsive">
+      <img src={{ url_for('static', filename='cam_img/cam_none.jpg') }} width="400" height="300" class="img-responsive">
+      <img src={{ url_for('static', filename='cam_img/cam_none.jpg') }} width="400" height="300" class="img-responsive">
+      <img src={{ url_for('static', filename='cam_img/cam_none.jpg') }} width="400" height="300" class="img-responsive">
+    </p>
+    <div>
+      <br />
+      <center>
+        <a href="#state_image1" data-toggle="modal" data-backdrop="static" id="state_img_1"></a>
+        <a href="#state_image2" data-toggle="modal" data-backdrop="static" id="state_img_2"></a>
+        <a href="#state_image3" data-toggle="modal" data-backdrop="static" id="state_img_3"></a>
+        <a href="#state_image4" data-toggle="modal" data-backdrop="static" id="state_img_4"></a>
+        <a href="#state_image5" data-toggle="modal" data-backdrop="static" id="state_img_5"></a>
+        <a href="#state_image6" data-toggle="modal" data-backdrop="static" id="state_img_6"></a>
+        <a href="#state_image7" data-toggle="modal" data-backdrop="static" id="state_img_7"></a>
+        <a href="#state_image8" data-toggle="modal" data-backdrop="static" id="state_img_8"></a>
+        <a href="#state_image9" data-toggle="modal" data-backdrop="static" id="state_img_9"></a>
+        <a href="#state_image10" data-toggle="modal" data-backdrop="static" id="state_img_10"></a>
+        <a href="#state_image11" data-toggle="modal" data-backdrop="static" id="state_img_11"></a>
+        <a href="#state_image12" data-toggle="modal" data-backdrop="static" id="state_img_12"></a>
+        <a href="#state_image13" data-toggle="modal" data-backdrop="static" id="state_img_13"></a>
+        <a href="#state_image14" data-toggle="modal" data-backdrop="static" id="state_img_14"></a>
+        <a href="#state_image15" data-toggle="modal" data-backdrop="static" id="state_img_15"></a>
+        <a href="#state_image16" data-toggle="modal" data-backdrop="static" id="state_img_16"></a>
+        <a href="#state_image17" data-toggle="modal" data-backdrop="static" id="state_img_17"></a>
+        <a href="#state_image18" data-toggle="modal" data-backdrop="static" id="state_img_18"></a>
+        <a href="#state_image19" data-toggle="modal" data-backdrop="static" id="state_img_19"></a>
+        <a href="#state_image20" data-toggle="modal" data-backdrop="static" id="state_img_20"></a>
+        <a href="#state_image21" data-toggle="modal" data-backdrop="static" id="state_img_21"></a>
+        <a href="#state_image22" data-toggle="modal" data-backdrop="static" id="state_img_22"></a>
+      </center>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <section>
+    <div class="modal fade" id="camera1" tabindex="-1" role="dialog" aria-labelledby="camera1Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p style="font-size: 30px;">
+              CCTV 2
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div class="modal-body" style="text-align: center;">
+            <img src={{ url_for('video_feed1') }} width="750" height="600" class="img-fluid">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="camera2" tabindex="-1" role="dialog" aria-labelledby="camera2Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p style="font-size: 30px;">
+              CCTV 3
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div class="modal-body" style="text-align: center;">
+            <img src={{ url_for('video_feed2') }} width="750" height="600" class="img-fluid">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image1" tabindex="-1" role="dialog" aria-labelledby="state1Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_1_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_1_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image2" tabindex="-1" role="dialog" aria-labelledby="state2Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_2_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_2_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image3" tabindex="-1" role="dialog" aria-labelledby="state3Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_3_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_3_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image4" tabindex="-1" role="dialog" aria-labelledby="state4Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_4_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_4_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image5" tabindex="-1" role="dialog" aria-labelledby="state5Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_5_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_5_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image6" tabindex="-1" role="dialog" aria-labelledby="state6Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_6_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_6_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image7" tabindex="-1" role="dialog" aria-labelledby="state7Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_7_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_7_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image8" tabindex="-1" role="dialog" aria-labelledby="state8Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_8_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_8_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image9" tabindex="-1" role="dialog" aria-labelledby="state9Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_9_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_9_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image10" tabindex="-1" role="dialog" aria-labelledby="state10Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_10_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_10_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image11" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_11_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_11_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image12" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_12_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_12_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image13" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_13_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_13_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image14" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_14_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_14_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image15" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_15_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_15_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image16" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_16_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_16_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image17" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_17_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_17_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image18" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_18_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_18_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image19" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_19_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_19_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image20" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_20_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_20_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image21" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_21_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_21_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="state_image22" tabindex="-1" role="dialog" aria-labelledby="state11Modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p id="state_img_22_data" style="font-size: 30px;">
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+          </div>
+          <div id="state_img_22_modal" class="modal-body" style="text-align: center;">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="text-muted small mb-0">Copyright &copy; Smart CCTV based on Deep Learning 2019</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{url_for('static',filename='vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{{url_for('static',filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{url_for('static',filename='js/stylish-portfolio.min.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <!-- Functions with Flask SocketIO -->
+  <script language="javascript">
+    $(document).ready(function () {
+      var socket = io.connect('http://' + document.domain + ':' + location.port + '/index');
+      var state_img_cam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var state_img_state = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+      var state_img_datetime = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+      var state_img_count = 0;
+
+      // Fire State
+      socket.on('fireResponse', function (msg) {
+        console.log('Fire: ' + msg.fire_state);
+      });
+
+      // Traffic Accident State
+      socket.on('trafficResponse', function (msg) {
+        console.log('Traffic Accdient: ' + msg.traffic_accident_state);
+      });
+
+      // Criminal State
+      socket.on('criminalResponse', function (msg) {
+        console.log('Criminal: ' + msg.criminal_state);
+      });
+
+      // Popup Window
+      socket.on('stateWindow', function (msg) {
+        console.log('stateWindow');
+        console.log('cameracmaera : ' + msg.cameraNum);
+        if (msg.cameraNum == 1) {
+          window.open('popup_alert_' + msg.cameraNum + '/' + msg.cameraNum + '/' + msg.state + '/' + msg.isGradcam, '상황발생1', 'left=0, top=0, width=550, height=500');
+        }
+        else {
+          window.open('popup_alert_' + msg.cameraNum + '/' + msg.cameraNum + '/' + msg.state + '/' + msg.isGradcam, '상황발생2', 'left=0, top=550, width=550, height=500');
+        }
+      });
+
+      // Count
+      socket.on('stateImgCount', function (msg) {
+        console.log('state_img_count: ' + msg.state_img_count);
+        if (msg.state_img_count == 1) {
+          console.log('1');
+          state_img_cam[0] = msg.cameraNum;
+          state_img_state[0] = msg.state;
+          state_img_datetime[0] = msg.time
+          $('#state_img_1').html("<img src={{ url_for('state_img1') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 2) {
+          console.log('2');
+          state_img_cam[1] = msg.cameraNum;
+          state_img_state[1] = msg.state;
+          state_img_datetime[1] = msg.time
+          $('#state_img_2').html("<img src={{ url_for('state_img2') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 3) {
+          console.log('3');
+          state_img_cam[2] = msg.cameraNum;
+          state_img_state[2] = msg.state;
+          state_img_datetime[2] = msg.time
+          $('#state_img_3').html("<img src={{ url_for('state_img3') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 4) {
+          console.log('4');
+          state_img_cam[3] = msg.cameraNum;
+          state_img_state[3] = msg.state;
+          state_img_datetime[3] = msg.time
+          $('#state_img_4').html("<img src={{ url_for('state_img4') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 5) {
+          console.log('5');
+          state_img_cam[4] = msg.cameraNum;
+          state_img_state[4] = msg.state;
+          state_img_datetime[4] = msg.time
+          $('#state_img_5').html("<img src={{ url_for('state_img5') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 6) {
+          console.log('6');
+          state_img_cam[5] = msg.cameraNum;
+          state_img_state[5] = msg.state;
+          state_img_datetime[5] = msg.time
+          $('#state_img_6').html("<img src={{ url_for('state_img6') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 7) {
+          console.log('7');
+          state_img_cam[6] = msg.cameraNum;
+          state_img_state[6] = msg.state;
+          state_img_datetime[6] = msg.time
+          $('#state_img_7').html("<img src={{ url_for('state_img7') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 8) {
+          console.log('8');
+          state_img_cam[7] = msg.cameraNum;
+          state_img_state[7] = msg.state;
+          state_img_datetime[7] = msg.time
+          $('#state_img_8').html("<img src={{ url_for('state_img8') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 9) {
+          console.log('9');
+          state_img_cam[8] = msg.cameraNum;
+          state_img_state[8] = msg.state;
+          state_img_datetime[8] = msg.time
+          $('#state_img_9').html("<img src={{ url_for('state_img9') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 10) {
+          console.log('10');
+          state_img_cam[9] = msg.cameraNum;
+          state_img_state[9] = msg.state;
+          state_img_datetime[9] = msg.time
+          $('#state_img_10').html("<img src={{ url_for('state_img10') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 11) {
+          console.log('11');
+          state_img_cam[10] = msg.cameraNum;
+          state_img_state[10] = msg.state;
+          state_img_datetime[10] = msg.time
+          $('#state_img_11').html("<img src={{ url_for('state_img11') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 12) {
+          console.log('12');
+          state_img_cam[11] = msg.cameraNum;
+          state_img_state[11] = msg.state;
+          state_img_datetime[11] = msg.time
+          $('#state_img_12').html("<img src={{ url_for('state_img12') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 13) {
+          console.log('13');
+          state_img_cam[12] = msg.cameraNum;
+          state_img_state[12] = msg.state;
+          state_img_datetime[12] = msg.time
+          $('#state_img_13').html("<img src={{ url_for('state_img13') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 14) {
+          console.log('14');
+          state_img_cam[13] = msg.cameraNum;
+          state_img_state[13] = msg.state;
+          state_img_datetime[13] = msg.time
+          $('#state_img_14').html("<img src={{ url_for('state_img14') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 15) {
+          console.log('15');
+          state_img_cam[14] = msg.cameraNum;
+          state_img_state[14] = msg.state;
+          state_img_datetime[14] = msg.time
+          $('#state_img_15').html("<img src={{ url_for('state_img15') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 16) {
+          console.log('16');
+          state_img_cam[15] = msg.cameraNum;
+          state_img_state[15] = msg.state;
+          state_img_datetime[15] = msg.time
+          $('#state_img_16').html("<img src={{ url_for('state_img16') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 17) {
+          console.log('17');
+          state_img_cam[16] = msg.cameraNum;
+          state_img_state[16] = msg.state;
+          state_img_datetime[16] = msg.time
+          $('#state_img_17').html("<img src={{ url_for('state_img17') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 18) {
+          console.log('18');
+          state_img_cam[17] = msg.cameraNum;
+          state_img_state[17] = msg.state;
+          state_img_datetime[17] = msg.time
+          $('#state_img_18').html("<img src={{ url_for('state_img18') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 19) {
+          console.log('19');
+          state_img_cam[18] = msg.cameraNum;
+          state_img_state[18] = msg.state;
+          state_img_datetime[18] = msg.time
+          $('#state_img_19').html("<img src={{ url_for('state_img19') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 20) {
+          console.log('20');
+          state_img_cam[19] = msg.cameraNum;
+          state_img_state[19] = msg.state;
+          state_img_datetime[19] = msg.time
+          $('#state_img_20').html("<img src={{ url_for('state_img20') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 21) {
+          console.log('21');
+          state_img_cam[20] = msg.cameraNum;
+          state_img_state[20] = msg.state;
+          state_img_datetime[20] = msg.time
+          $('#state_img_21').html("<img src={{ url_for('state_img21') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+        else if (msg.state_img_count == 22) {
+          console.log('22');
+          state_img_cam[21] = msg.cameraNum;
+          state_img_state[21] = msg.state;
+          state_img_datetime[21] = msg.time
+          $('#state_img_22').html("<img src={{ url_for('state_img22') }} width=\"70\" height=\"70\" onerror=\"this.style.display='none'\">");
+        }
+      });
+
+      // 상황이미지 모달 새로고침
+      socket.on('state_img_modal_refresh', function () {
+        $('#state_img_1_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_1.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_2_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_2.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_3_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_3.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_4_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_4.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_5_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_5.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_6_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_6.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_7_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_7.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_8_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_8.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_9_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_9.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_10_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_10.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_11_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_11.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_12_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_12.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_13_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_13.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_14_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_14.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_15_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_15.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_16_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_16.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_17_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_17.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_18_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_18.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_19_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_19.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_20_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_20.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_21_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_21.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+        $('#state_img_22_modal').html("<img src={{ url_for('static', filename='cam_img/state_img/state_img_22.jpg') }} width=\"750\" height=\"600\" class=\"img-fluid\">");
+      });
+
+      // 상황이미지 정보 새로고침
+      socket.on('state_img_data_refresh', function () {
+        $('#state_img_1_data').html("위치 : CCTV " + state_img_cam[0] + "<br/> 상황 : " + state_img_state[0] + "<br/> 발생시간 : " + state_img_datetime[0]);
+        $('#state_img_2_data').html("위치 : CCTV " + state_img_cam[1] + "<br/> 상황 : " + state_img_state[1] + "<br/> 발생시간 : " + state_img_datetime[1]);
+        $('#state_img_3_data').html("위치 : CCTV " + state_img_cam[2] + "<br/> 상황 : " + state_img_state[2] + "<br/> 발생시간 : " + state_img_datetime[2]);
+        $('#state_img_4_data').html("위치 : CCTV " + state_img_cam[3] + "<br/> 상황 : " + state_img_state[3] + "<br/> 발생시간 : " + state_img_datetime[3]);
+        $('#state_img_5_data').html("위치 : CCTV " + state_img_cam[4] + "<br/> 상황 : " + state_img_state[4] + "<br/> 발생시간 : " + state_img_datetime[4]);
+        $('#state_img_6_data').html("위치 : CCTV " + state_img_cam[5] + "<br/> 상황 : " + state_img_state[5] + "<br/> 발생시간 : " + state_img_datetime[5]);
+        $('#state_img_7_data').html("위치 : CCTV " + state_img_cam[6] + "<br/> 상황 : " + state_img_state[6] + "<br/> 발생시간 : " + state_img_datetime[6]);
+        $('#state_img_8_data').html("위치 : CCTV " + state_img_cam[7] + "<br/> 상황 : " + state_img_state[7] + "<br/> 발생시간 : " + state_img_datetime[7]);
+        $('#state_img_9_data').html("위치 : CCTV " + state_img_cam[8] + "<br/> 상황 : " + state_img_state[8] + "<br/> 발생시간 : " + state_img_datetime[8]);
+        $('#state_img_10_data').html("위치 : CCTV " + state_img_cam[9] + "<br/> 상황 : " + state_img_state[9] + "<br/> 발생시간 : " + state_img_datetime[9]);
+        $('#state_img_11_data').html("위치 : CCTV " + state_img_cam[10] + "<br/> 상황 : " + state_img_state[10] + "<br/> 발생시간 : " + state_img_datetime[10]);
+        $('#state_img_12_data').html("위치 : CCTV " + state_img_cam[11] + "<br/> 상황 : " + state_img_state[11] + "<br/> 발생시간 : " + state_img_datetime[11]);
+        $('#state_img_13_data').html("위치 : CCTV " + state_img_cam[12] + "<br/> 상황 : " + state_img_state[12] + "<br/> 발생시간 : " + state_img_datetime[12]);
+        $('#state_img_14_data').html("위치 : CCTV " + state_img_cam[13] + "<br/> 상황 : " + state_img_state[13] + "<br/> 발생시간 : " + state_img_datetime[13]);
+        $('#state_img_15_data').html("위치 : CCTV " + state_img_cam[14] + "<br/> 상황 : " + state_img_state[14] + "<br/> 발생시간 : " + state_img_datetime[14]);
+        $('#state_img_16_data').html("위치 : CCTV " + state_img_cam[15] + "<br/> 상황 : " + state_img_state[15] + "<br/> 발생시간 : " + state_img_datetime[15]);
+        $('#state_img_17_data').html("위치 : CCTV " + state_img_cam[16] + "<br/> 상황 : " + state_img_state[16] + "<br/> 발생시간 : " + state_img_datetime[16]);
+        $('#state_img_18_data').html("위치 : CCTV " + state_img_cam[17] + "<br/> 상황 : " + state_img_state[17] + "<br/> 발생시간 : " + state_img_datetime[17]);
+        $('#state_img_19_data').html("위치 : CCTV " + state_img_cam[18] + "<br/> 상황 : " + state_img_state[18] + "<br/> 발생시간 : " + state_img_datetime[18]);
+        $('#state_img_20_data').html("위치 : CCTV " + state_img_cam[19] + "<br/> 상황 : " + state_img_state[19] + "<br/> 발생시간 : " + state_img_datetime[19]);
+        $('#state_img_21_data').html("위치 : CCTV " + state_img_cam[20] + "<br/> 상황 : " + state_img_state[20] + "<br/> 발생시간 : " + state_img_datetime[20]);
+        $('#state_img_22_data').html("위치 : CCTV " + state_img_cam[21] + "<br/> 상황 : " + state_img_state[21] + "<br/> 발생시간 : " + state_img_datetime[21]);
+      });
+    });
+  </script>
+</body>
+
+</html>
